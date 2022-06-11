@@ -1,5 +1,5 @@
 
-export const DOMIdList = {
+export const domIdList = {
     'Search Bar': 'search-bar',
     'City Name': 'city-name',
     'Weather Status': 'weather',
@@ -8,7 +8,10 @@ export const DOMIdList = {
     'Feels Like Temperature': 'feels-like',
     'High Temperature': 'high',
     'Low Temperature': 'low',
-    'Humidity': 'humidity'
+    'Humidity': 'humidity',
+    'Weather Icon': 'weather-icon',
+    'Weather Description': 'weather-description',
+    'Temperature Unit Conversion Button': 'conversion-button'
 }
 
 export function createSearchBarArea() {
@@ -29,7 +32,7 @@ export function createSearchBarArea() {
         searchBar.type = 'text';
         searchBar.name = 'location';
         searchBar.placeholder = 'Search a Location';
-        searchBar.id = DOMIdList['Search Bar'];
+        searchBar.id = domIdList['Search Bar'];
         return searchBar;
     }
 
@@ -75,7 +78,7 @@ export function createWeatherDisplay() {
 
     function _createCityName() {
         const cityName = document.createElement('div');
-        cityName.id = DOMIdList["City Name"];
+        cityName.id = domIdList["City Name"];
         return cityName;
     }
 
@@ -89,14 +92,16 @@ export function createWeatherDisplay() {
     function _createWeatherStatusBox() {
 
         const currentWeatherStatusBox = document.createElement('div');
-        currentWeatherStatusBox.id = DOMIdList["Weather Status Box"];
+        currentWeatherStatusBox.id = domIdList["Weather Status Box"];
         const currentTemp = document.createElement('div');
-        currentTemp.id = DOMIdList["Current Temperature"];
+        currentTemp.id = domIdList["Current Temperature"];
 
         const weatherStatus = document.createElement('div');
-        weatherStatus.id = DOMIdList["Weather Status"];
+        weatherStatus.id = domIdList["Weather Status"];
         const weatherSymbol = document.createElement('img');
+        weatherSymbol.id = domIdList["Weather Icon"];
         const weatherDescription = document.createElement('div');
+        weatherDescription.id = domIdList["Weather Description"];
         weatherStatus.appendChild(weatherSymbol);
         weatherStatus.appendChild(weatherDescription);
 
@@ -109,7 +114,7 @@ export function createWeatherDisplay() {
     function _createInfoBox(domId) {
 
         const infoContainer = document.createElement('div');
-        infoContainer.id = DOMIdList[domId];
+        infoContainer.id = domIdList[domId];
 
         const infoDescription = document.createElement('div');
 
@@ -123,3 +128,12 @@ export function createWeatherDisplay() {
     }
 }
 
+export function createConversionButton() {
+
+    const conversionButton = document.createElement('button');
+    conversionButton.classList.add('conversion-button');
+    conversionButton.id = domIdList["Temperature Unit Conversion Button"];
+    conversionButton.textContent = 'C\u00B0/F\u00B0';
+
+    document.body.appendChild(conversionButton);
+}
