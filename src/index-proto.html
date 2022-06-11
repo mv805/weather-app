@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Weather App</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <script defer="defer" src="bundle.js"></script>
+        <link rel="stylesheet" href="../src/style.css">
+    </head>
+
+    <body>
+        <header>The Weather App</header>
+        <div class="search-bar panel">
+
+            <input type="text" name="location" id="search"
+                placeholder="Search a Location">
+            <div class="search-error-text">Location should be in format:
+                city name/city name, country code</div>
+            <button>Search</button>
+
+        </div>
+        <div class="weather-display panel">
+            <div id="city-name">Los Angeles</div>
+            <div id="weather">
+                <div id="current-temp">56</div>
+                <div id="weather-status">
+                    <img src="/assets/sunny.svg" alt="weather-icon">
+                    <div>Sunny</div>
+                </div>
+            </div>
+            <div  id="feels-like">
+                <div>Feels Like</div>
+                <div class="temp-value">55</div>
+            </div>
+            <div id="high">
+                <div>High</div>
+                <div class="temp-value">55</div>
+            </div>
+            <div id="low">
+                <div>Low</div>
+                <div class="temp-value">55</div>
+            </div>
+            <div id="humidity">
+                <div>Humidity</div>
+                <div class="temp-value">55</div>
+            </div>
+        </div>
+    </body>
+
+</html>
