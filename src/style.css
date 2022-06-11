@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 body {
     background-color: rgb(43, 43, 43);
     margin: 0;
     width: 100vw;
+    height: 100vh;
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
@@ -15,6 +17,8 @@ header {
     text-align: center;
     margin: 5px 0 0 0;
     color: rgb(168, 168, 168);
+    font-size: 2rem;
+    font-family: 'Lobster', cursive;
 }
 img {
     width: 2.5rem;
@@ -36,7 +40,6 @@ img {
 
 .search-bar {
     height: 8rem;
-
     display: flex;
     flex-direction: column;
     justify-content: top;
@@ -44,7 +47,8 @@ img {
 
 }
 
-.search-bar #search {
+#search-bar {
+    font: inherit;
     color: aliceblue;
     margin: 10px 0;
     height: 2rem;
@@ -54,11 +58,11 @@ img {
     background-color: rgb(131, 131, 131);
 }
 
-#search::placeholder {
-    color: rgb(80, 80, 80)
+#search-bar::placeholder {
+    color: rgb(88, 88, 88)
 }
 
-#search:focus {
+#search-bar:focus {
     outline-color: rgb(255, 234, 166);
     outline-style: solid;
     outline-width: 3px;
@@ -86,7 +90,8 @@ img {
     height: 2rem;
     width: 100%;
     text-align: left;
-    font-size: .7rem;
+    font-size: .8rem;
+    font-family: inherit;
     color: rgb(255, 145, 145);
 }
 
@@ -193,4 +198,18 @@ img {
     line-height: 2.5;
     box-shadow: rgb(34, 34, 34) 3px 3px 6px 0px inset, rgba(63, 63, 63, 0.5) -3px -3px 6px 1px inset;
     border-radius: 5px;
+}
+
+.conversion-button {
+    width: 100px;
+    border-radius: 3px;
+    border-style: none;
+    height: 30px;
+    font-family: inherit;
+    background-color: rgb(190, 190, 190);
+}
+
+.conversion-button:active {
+    background-color: aliceblue;
+    color: rgb(107, 107, 107);
 }
