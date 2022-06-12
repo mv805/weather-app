@@ -2,7 +2,7 @@
 export const domIdList = {
     'Search Bar': 'search-bar',
     'City Name': 'city-name',
-    'Weather Status': 'weather',
+    'Weather Status Container': 'weather',
     'Current Temperature': 'current-temp',
     'Weather Status Box': 'weather-status',
     'Feels Like Temperature': 'feels-like',
@@ -92,14 +92,16 @@ export function createWeatherDisplay() {
     function _createWeatherStatusBox() {
 
         const currentWeatherStatusBox = document.createElement('div');
-        currentWeatherStatusBox.id = domIdList["Weather Status Box"];
+        currentWeatherStatusBox.id = domIdList["Weather Status Container"];
+
         const currentTemp = document.createElement('div');
         currentTemp.id = domIdList["Current Temperature"];
 
         const weatherStatus = document.createElement('div');
-        weatherStatus.id = domIdList["Weather Status"];
+        weatherStatus.id = domIdList["Weather Status Box"];
         const weatherSymbol = document.createElement('img');
         weatherSymbol.id = domIdList["Weather Icon"];
+        weatherSymbol.alt = 'weather icon';
         const weatherDescription = document.createElement('div');
         weatherDescription.id = domIdList["Weather Description"];
         weatherStatus.appendChild(weatherSymbol);
@@ -117,6 +119,7 @@ export function createWeatherDisplay() {
         infoContainer.id = domIdList[domId];
 
         const infoDescription = document.createElement('div');
+        infoDescription.textContent = domId.replace(' Temperature', '');
 
         const infoOutput = document.createElement('div');
         infoOutput.classList.add('temp-value');
@@ -136,4 +139,12 @@ export function createConversionButton() {
     conversionButton.textContent = 'C\u00B0/F\u00B0';
 
     document.body.appendChild(conversionButton);
+}
+
+export function createHeader() {
+
+    const header = document.createElement('header');
+    header.textContent = 'The Weather App';
+
+    document.body.appendChild(header);
 }
