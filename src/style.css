@@ -134,13 +134,18 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(131, 131, 131);
+    width: 5rem;
+    height: 5rem;
+    border-radius: 4px;
 }
 
 #current-temp {
     justify-self: center;
     align-self: center;
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 900;
+    padding-left: 1rem;
 }
 
 #feels-like {
