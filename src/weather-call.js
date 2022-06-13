@@ -10,6 +10,8 @@ export async function getCurrentWeather(location, units = 'imperial') {
     } else {
         searchUrl += '&units=imperial';
     }
+
+    console.log(searchUrl);
     
     const response = await fetch(searchUrl, {mode: 'cors'});
     const json = await response.json();
