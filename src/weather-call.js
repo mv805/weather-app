@@ -1,7 +1,7 @@
 //free api key from openweathermap.org
 const API_KEY = 'd78f36805db656f7f4cf2a5ddb1892c7';
 
-export function getCurrentWeather(location, units = 'standard') {
+export async function getCurrentWeather(location, units = 'imperial') {
 
     let searchUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`;
 
@@ -10,15 +10,10 @@ export function getCurrentWeather(location, units = 'standard') {
     } else {
         searchUrl += '&units=imperial';
     }
-    console.log('URL to search: ' + searchUrl);
+    
+    const response = await fetch(searchUrl, {mode: 'cors'});
+    const json = await response.json();
 
-    return fetch(searchUrl, { mode: 'cors' })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (weatherData) {
-            console.log('Location: '+ weatherData.name);
-            return weatherData;
-        });
+    return json;
 
 }
