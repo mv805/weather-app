@@ -32,9 +32,7 @@ import './style.css';
 // }
 const weatherUnits = {
     imperial: true,
-    'imperial-unit': '\u00B0',
     metric: false,
-    'metric unit': '\u00B0'
 }
 
 display.createHeader();
@@ -43,6 +41,15 @@ display.createWeatherDisplay();
 display.createConversionButton();
 
 updateWeatherInfo('montreal');
+
+
+const conversionButton = document.getElementById(display.domIdList['Temperature Unit Conversion Button']);
+const searchButton = document.getElementById(display.domIdList['Search Button']);
+
+conversionButton.addEventListener('click', () => {
+    convertTemperaturesOnDisplay();
+});
+
 /*
 *fill out initial boxes 
 *search event listener
@@ -53,12 +60,13 @@ updateWeatherInfo('montreal');
 *
 *
 */
+
 function updateWeatherInfo(location) {
     weatherCall.getCurrentWeather(location)
         .then(resultData => {
             document.getElementById(display.domIdList['City Name']).textContent = resultData.name;
 
-            document.getElementById(display.domIdList['Current Temperature']).textContent = Math.round(resultData.main.temp) + '\u00B0';
+            document.getElementById(display.domIdList['Current Temperature']).textContent = Math.round(resultData.main.temp) + '\u00B0' + 'F';
 
             document.getElementById(display.domIdList['Weather Description']).textContent = resultData.weather[0].main;
 
@@ -70,13 +78,63 @@ function updateWeatherInfo(location) {
             document.querySelector(`#${display.domIdList['High Temperature']} .temp-value`).textContent = Math.round(resultData.main.temp_max) + '\u00B0';
 
             document.querySelector(`#${display.domIdList['Low Temperature']} .temp-value`).textContent = Math.round(resultData.main.temp_min) + '\u00B0';
-            
+
             document.querySelector(`#${display.domIdList.Humidity} .temp-value`).textContent = `${Math.round(resultData.main.humidity)}%`;
         })
 }
 
-function updateTempUnits() {
+function convertTemperaturesOnDisplay() {
+
+    let convertToUnit;
+
+    if (weatherUnits.imperial){
+        weatherUnits.imperial = false;
+        weatherUnits.metric = true;
+        convertToUnit = 'C';
+    } else {
+        weatherUnits.imperial = true;
+        weatherUnits.metric = false;
+        convertToUnit = 'F';
+    }
+
+    swapTemperatureValue(`#${display.domIdList['Current Temperature']}`, 2, convertToUnit, true);
+    swapTemperatureValue(`#${display.domIdList['Feels Like Temperature']} .temp-value`, 1, convertToUnit, false);
+    swapTemperatureValue(`#${display.domIdList['High Temperature']} .temp-value`, 1, convertToUnit, false);
+    swapTemperatureValue(`#${display.domIdList['Low Temperature']} .temp-value`, 1, convertToUnit, false);
+
+}
+
+function swapTemperatureValue(domSelector, charsToRemove, convertToUnit, degreeSymbol) {
+
+    let degreeSymbolString;
+
+    if(degreeSymbol){
+        degreeSymbolString = '\u00B0';
+    } else {
+        degreeSymbolString = '';
+    }
+
+    let tempToChange = document.querySelector(domSelector).textContent;
+    tempToChange = tempToChange.slice(0, tempToChange.length - charsToRemove);
+    document.querySelector(domSelector).textContent = convertTemperature(tempToChange, convertToUnit) + degreeSymbolString + convertToUnit;
+}
+
+function convertTemperature(temperature, convertToThisUnit) {
+
+    const CONVERSION_FACTOR = 1.8;
+    const TEMP_OFFSET = 32;
     
+    let result;
+
+    if(convertToThisUnit === 'F'){
+        result = Math.round(temperature * CONVERSION_FACTOR) + TEMP_OFFSET;
+        return result;
+    } else if (convertToThisUnit === 'C'){
+        result = Math.round((temperature - TEMP_OFFSET) / CONVERSION_FACTOR);
+        return result;
+    }  else {
+        return temperature;
+    }
 }
 
 
