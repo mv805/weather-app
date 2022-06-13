@@ -11,7 +11,8 @@ export const domIdList = {
     'Humidity': 'humidity',
     'Weather Icon': 'weather-icon',
     'Weather Description': 'weather-description',
-    'Temperature Unit Conversion Button': 'conversion-button'
+    'Temperature Unit Conversion Button': 'conversion-button',
+    'Search Button': 'search',
 }
 
 export function createSearchBarArea() {
@@ -39,6 +40,7 @@ export function createSearchBarArea() {
     function _createSearchButton() {
         const searchButton = document.createElement('button');
         searchButton.textContent = 'Search';
+        searchButton.id = domIdList["Search Button"];
         return searchButton;
     }
 
