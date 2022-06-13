@@ -28,6 +28,10 @@ img {
     width: 2.5rem;
 }
 
+button {
+    color: black;
+}
+
 /*panel  ||*/
 .panel {
     background-color: rgb(77, 77, 80);
