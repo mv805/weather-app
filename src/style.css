@@ -1,15 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
+:root {
+    font-size: 14px;
+}
+
 body {
     background-color: rgb(43, 43, 43);
     margin: 0;
     width: 100vw;
-    height: 100vh;
+    min-height: 130vh;
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     align-items: center;
 }
 
@@ -135,15 +139,15 @@ img {
     flex-direction: column;
     align-items: center;
     background-color: rgb(131, 131, 131);
-    width: 5rem;
     height: 5rem;
+    width: 70%;
     border-radius: 4px;
 }
 
 #current-temp {
     justify-self: center;
     align-self: center;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 900;
     padding-left: 1rem;
 }
@@ -205,16 +209,16 @@ img {
     border-radius: 5px;
 }
 
-.conversion-button {
+#conversion-button {
     width: 100px;
     border-radius: 3px;
     border-style: none;
-    height: 30px;
+    padding: .5rem 0;
     font-family: inherit;
     background-color: rgb(190, 190, 190);
 }
 
-.conversion-button:active {
-    background-color: aliceblue;
-    color: rgb(107, 107, 107);
+#conversion-button:active {
+    background-color: rgb(78, 78, 78);
+    color: rgb(161, 161, 161);
 }
