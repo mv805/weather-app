@@ -1,3 +1,5 @@
+//ABOUT: various functions for manipulating the display, to be referenced from the index module
+import * as index from './index.js';
 
 export const domIdList = {
     'Search Bar': 'search-bar',
@@ -149,4 +151,58 @@ export function createHeader() {
     header.textContent = 'The Weather App';
 
     document.body.appendChild(header);
+}
+
+export function clearSearchAndError() {
+
+    document.getElementById(domIdList['Search Bar']).value = '';
+    document.querySelector(`.search-error-text`).textContent = '';
+
+}
+
+export function convertTemperaturesOnDisplay(weatherUnits) {
+
+    if (weatherUnits.imperial) {
+        weatherUnits.imperial = false;
+        weatherUnits.metric = true;
+        weatherUnits['weather letter'] = 'C';
+    } else {
+        weatherUnits.imperial = true;
+        weatherUnits.metric = false;
+        weatherUnits['weather letter'] = 'F';
+    }
+
+    swapTemperatureValue(`#${domIdList['Current Temperature']}`, 2, weatherUnits['weather letter']);
+    swapTemperatureValue(`#${domIdList['Feels Like Temperature']} .temp-value`, 2, weatherUnits['weather letter']);
+    swapTemperatureValue(`#${domIdList['High Temperature']} .temp-value`, 2, weatherUnits['weather letter']);
+    swapTemperatureValue(`#${domIdList['Low Temperature']} .temp-value`, 2, weatherUnits['weather letter']);
+
+}
+
+function swapTemperatureValue(domSelector, charsToRemove, convertToUnit) {
+
+    let tempToChange = document.querySelector(domSelector).textContent;
+    tempToChange = tempToChange.slice(0, tempToChange.length - charsToRemove);
+    document.querySelector(domSelector).textContent = index.convertTemperature(tempToChange, convertToUnit) + '\u00B0' + convertToUnit;
+    
+}
+
+export function updateWeatherDisplay(weatherData, weatherUnits){
+
+    document.getElementById(domIdList['City Name']).textContent = weatherData.name;
+
+    document.getElementById(domIdList['Current Temperature']).textContent = Math.round(weatherData.main.temp) + '\u00B0' + weatherUnits['weather letter'];
+
+    document.getElementById(domIdList['Weather Description']).textContent = weatherData.weather[0].main;
+
+    let icon = document.getElementById(domIdList['Weather Icon']);
+    icon.src = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`;
+
+    document.querySelector(`#${domIdList['Feels Like Temperature']} .temp-value`).textContent = Math.round(weatherData.main.feels_like) + '\u00B0' + weatherUnits['weather letter'];
+
+    document.querySelector(`#${domIdList['High Temperature']} .temp-value`).textContent = Math.round(weatherData.main.temp_max) + '\u00B0' + weatherUnits['weather letter'];
+
+    document.querySelector(`#${domIdList['Low Temperature']} .temp-value`).textContent = Math.round(weatherData.main.temp_min) + '\u00B0' + weatherUnits['weather letter'];
+
+    document.querySelector(`#${domIdList.Humidity} .temp-value`).textContent = `${Math.round(weatherData.main.humidity)}%`;
 }
