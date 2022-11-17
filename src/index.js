@@ -7,7 +7,7 @@ const weatherUnits = {
     imperial: true,
     metric: false,
     'weather letter': 'F',
-}
+};
 
 //initial page setup
 display.createHeader();
@@ -38,24 +38,28 @@ function searchLocation() {
     updateWeatherInfo(searchInput);
 }
 
-async function updateWeatherInfo(location) {
+function updateWeatherInfo(location) {
 
-    const weatherData = await weatherCall.getCurrentWeather(location);
+    const weatherData = weatherCall.getCurrentWeather(location);
 
-    if(weatherData.message === 'city not found'){
-        console.log('api call failed');
-        document.querySelector('.search-error-text').textContent = 
-        'Location should be in format: city name/city name, country code';
-        return;
-    }
-    
-    //normalize the units to F by default
-    weatherUnits.imperial = true;
-    weatherUnits.metric = false;
-    weatherUnits['weather letter'] = 'F';
+    weatherData.then((data) => {
 
-    display.updateWeatherDisplay(weatherData, weatherUnits);
-    display.clearSearchAndError();
+        if (data.message === 'city not found') {
+            console.log('api call failed');
+            document.querySelector('.search-error-text').textContent =
+                'Location should be in format: city name/city name, country code';
+            return;
+        }
+
+        //normalize the units to F by default
+        weatherUnits.imperial = true;
+        weatherUnits.metric = false;
+        weatherUnits['weather letter'] = 'F';
+
+        display.updateWeatherDisplay(data, weatherUnits);
+        display.clearSearchAndError();
+
+    });
 
 }
 
