@@ -1,6 +1,6 @@
 # Javascript Weather API application
 
-An app leveraging a weather API for quick access to local weather. Built with Javascript and CSS
+An app leveraging a weather API for quick access to local weather. Built with Javascript and CSS and utilizing webpack for dependency management.
 ### Screenshot
 
 ![](/screenshot.PNG)
